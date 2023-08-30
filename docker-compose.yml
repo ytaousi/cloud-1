@@ -1,4 +1,35 @@
 version: '3'
 services:
-    nginx:
+  nginx:
+    container_name: nginx
+    pull_policy: never
+    build: 
+      context: ./nginx
+      dockerfile: Dockerfile
+    image: nginx:yassir
+    volumes:
+      - ./volumes:/var/lib/nginx/html/
+    ports: 
+      - 8081:80
+  phpmyadmin:
+    container_name: phpmyadmin
+    pull_policy: never
+    build:
+      context: ./phpmyadmin
+      dockerfile: Dockerfile
+    image: phpmyadmin:yassir
+    # volumes:
+    #   - ./volumes/phpmyadmin:/tmp
+#   mariadb:
+#     container_name: mariadb
+#     build: ./mariadb
+#     image: mariadb:yassir
+#     pull_policy: never
+#   wordpress:
+#     container_name: wordpress
+#     build: ./wordpress
+#     image: wordpress:yassir
+#     pull_policy: never
+#     depends_on:
+#       - mariadb
     

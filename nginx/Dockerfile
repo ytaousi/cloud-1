@@ -1,6 +1,12 @@
 FROM alpine:latest
 
-RUN apk update && apk upgrade && apk add nginx curl vim
-COPY ./configs/default.conf /etc/nginx/site-enabled
+EXPOSE 80
 
-CMD ["/bin/sh"]
+RUN apk update && apk upgrade && apk add nginx curl vim openrc
+
+RUN mkdir -p  /run/openrc/ && touch /run/openrc/softlevel
+
+COPY ./configs/default.conf /etc/nginx/http.d/default.conf
+COPY ./configs/initscript.sh .
+
+CMD [ "sh", "./initscript.sh" ]
