@@ -1,5 +1,8 @@
 #!/bin/bash
 
+adduser -D -g www www
+chown -R www:www /usr/share/wordpress
+mv /wp-config.php /usr/share/wordpress/
 
 
 rc-status

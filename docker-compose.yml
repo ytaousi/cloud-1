@@ -23,6 +23,8 @@ services:
     pull_policy: never
     volumes:
       - ./volumes/wordpress:/usr/share/wordpress
+    ports:
+      - 9000
     # depends_on:
     #   - mariadb
     
