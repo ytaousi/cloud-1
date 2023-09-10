@@ -8,22 +8,27 @@ services:
       dockerfile: Dockerfile
     image: nginx:yassir
     volumes:
-      - ./volumes/wordpress/:/var/www/html/
-    ports: 
-      - 8081:80
+      - ./volumes/wordpress:/var/www/html/wordpress
+    ports:
       - 8443:443
-#   mariadb:
-#     container_name: mariadb
-#     build: ./mariadb
-#     image: mariadb:yassir
-#     pull_policy: never
+    depends_on:
+      - wordpress
+  # mariadb:
+  #   container_name: mariadb
+  #   build: ./mariadb
+  #   image: mariadb:yassir
+  #   pull_policy: never
+  #   env_file:
+  #     - .env_variables
   wordpress:
     container_name: wordpress
     build: ./wordpress
     image: wordpress:yassir
     pull_policy: never
     volumes:
-      - ./volumes/wordpress:/usr/share/wordpress
+      - ./volumes/wordpress:/var/www/html/wordpress
+    env_file:
+      - .env_variables
     # depends_on:
     #   - mariadb
     

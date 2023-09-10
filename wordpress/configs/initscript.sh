@@ -1,15 +1,11 @@
 #!/bin/bash
-FILE=/usr/share/wordpress/wp-config-sample.php
-if [ -f "$FILE" ]; then
-    echo "$FILE exists."
-else
+FILE=/var/www/html/wordpress/wp-config.php
+if [ ! -f "$FILE" ]; then
     wget https://wordpress.org/latest.zip
-    unzip latest.zip -d /usr/share
-    mv /wp-config.php /usr/share/wordpress/wp-config.php
-    rm -f /usr/share/wordpress/wp-config-sample.php
+    unzip latest.zip -d /var/www/html/
+    mv /wp-config.php /var/www/html/wordpress/wp-config.php
+    rm -f /var/www/html/wordpress/wp-config-sample.php
 fi
 
-sleep 300
-
 #rc-service php7.3-fpm start
-#php-fpm7.3 -F -R
+php-fpm7.3 -F -R

@@ -2,7 +2,7 @@ FROM debian:buster
 
 EXPOSE 9000
 
-RUN apt update && apt upgrade -y && apt install -y vim dos2unix curl wget unzip php-fpm  php openrc
+RUN apt update && apt upgrade -y && apt install -y vim dos2unix curl wget unzip php-zip php-xml php-fpm php openrc php-bcmath php-curl php-imagick php-intl php-json php-mbstring php-mysql 
 
 RUN mkdir -p  /run/openrc/ && touch /run/openrc/softlevel
 
