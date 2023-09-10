@@ -1,14 +1,19 @@
-FROM alpine:3.12
+FROM debian:buster
 
 EXPOSE 9000
 
-RUN apk update && apk upgrade && apk add vim curl openrc wget php7-fpm
+RUN apt update && apt upgrade -y && apt install -y vim dos2unix curl wget unzip php-fpm  php openrc
 
-#setup openrc
 RUN mkdir -p  /run/openrc/ && touch /run/openrc/softlevel
 
-COPY ./configs/wp-config.php /wp-config.php
-COPY ./configs/www.conf /etc/php7/php-fpm.d/www.conf
-COPY ./configs/initscript.sh /initscript.sh
+RUN mkdir /var/run/php
+COPY ./configs/www.conf /etc/php/7.3/fpm/pool.d/www.conf
 
-ENTRYPOINT [ "sh", "./initscript.sh" ]
+COPY ./configs/wp-config.php .
+
+COPY ./configs/initscript.sh /initscript.sh
+COPY ./configs/wp-config.php .
+
+RUN dos2unix /initscript.sh
+
+ENTRYPOINT [ "/bin/bash", "./initscript.sh" ]
