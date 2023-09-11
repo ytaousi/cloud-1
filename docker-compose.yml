@@ -24,7 +24,7 @@ services:
   #   volumes:
   #     - ./volumes/database:/var/lib/mysql
   wordpress:
-    container_name: wordpress
+    container_name: php-fpm
     build: ./wordpress
     image: wordpress:yassir
     pull_policy: never
