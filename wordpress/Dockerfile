@@ -13,6 +13,7 @@ COPY ./configs/wp-config.php .
 
 COPY ./configs/initscript.sh /initscript.sh
 COPY ./configs/wp-config.php .
+COPY ./configs/config.inc.php /config.inc.php
 
 RUN dos2unix /initscript.sh
 

@@ -9,19 +9,20 @@ services:
     image: nginx:yassir
     volumes:
       - ./volumes/wordpress:/var/www/html/wordpress
+      - ./volumes/phpmyadmin:/var/www/html/phpmyadmin
     ports:
       - 8443:443
     depends_on:
       - wordpress
-  mariadb:
-    container_name: mariadb
-    build: ./mariadb
-    image: mariadb:yassir
-    pull_policy: never
-    env_file:
-      - .env_variables
-    volumes:
-      - ./volumes/database:/var/lib/mysql
+  # mariadb:
+  #   container_name: mariadb
+  #   build: ./mariadb
+  #   image: mariadb:yassir
+  #   pull_policy: never
+  #   env_file:
+  #     - .env_variables
+  #   volumes:
+  #     - ./volumes/database:/var/lib/mysql
   wordpress:
     container_name: wordpress
     build: ./wordpress
@@ -29,8 +30,9 @@ services:
     pull_policy: never
     volumes:
       - ./volumes/wordpress:/var/www/html/wordpress
+      - ./volumes:/var/www/html/
     env_file:
       - .env_variables
-    depends_on:
-      - mariadb
+    # depends_on:
+    #   - mariadb
     
