@@ -67,7 +67,8 @@
       state: present  
       create: yes
   roles:
-    - mariadb
+    # - common
+    # - mariadb
     - nginx
-    - phpmyadmin
-    - wordpress
+    # - phpmyadmin
+    # - wordpress

@@ -1,2 +1,9 @@
 ---
-# tasks file for mariadb
+  - name: build mariadb image
+    docker_image:
+      name: mariadb:yassir
+      source: build
+      build:
+        path: /root/cloud-1/mariadb/
+        pull: false
+      state: present
