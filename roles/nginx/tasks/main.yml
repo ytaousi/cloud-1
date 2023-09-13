@@ -1,9 +1,0 @@
----
-  - name: build nginx image
-    docker_image:
-      name: nginx:yassir
-      source: build
-      build:
-        path: /root/cloud-1/nginx/
-        pull: false
-      state: present

@@ -1,0 +1,9 @@
+---
+- name: start services
+  hosts: all
+  become: true
+  tasks:
+    - name: run makefile in server to start 
+      command: make all
+      args:
+        chdir: /home/ytaousi/cloud-1

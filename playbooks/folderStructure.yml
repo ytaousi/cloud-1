@@ -1,0 +1,22 @@
+---
+- name: setup server folder structure
+  hosts: all
+  become: true
+  gather_facts: true
+  tasks:
+    - name: create base folder
+      file:
+        path: /home/ytaousi/cloud-1
+        state: directory
+    - name: copy local files to base folder
+      copy:
+        src: ../srcs/
+        dest: /home/ytaousi/cloud-1
+    - name: add data storage folder
+      file:
+        path: /home/ytaousi/cloud-1/data/wordpress
+        state: directory
+    - name: add database storage folder
+      file:
+        path: /home/ytaousi/cloud-1/data/mariadb
+        state: directory

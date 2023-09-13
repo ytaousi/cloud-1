@@ -1,74 +1,10 @@
 ---
-- hosts: all
-  become: true
-  gather_facts: true
-  tasks:
-  - name: Update System Packages
-    apt:
-      pkg:
-        - curl
-        - vim
-        - wget
-        - python3-pip
-        - virtualenv
-        - python3-setuptools
-        - software-properties-common
-        - apt-transport-https
-        - ca-certificates
-      state: latest
-      update_cache: true
-  - name: get gpg and key for docker environment
-    apt_key:
-        url: https://download.docker.com/linux/ubuntu/gpg
-        state: present
-  - name: get docker repository
-    apt_repository:
-        repo: deb https://download.docker.com/linux/ubuntu focal stable
-        state: present
-  - name: install docker
-    apt:
-        name: docker-ce
-        state: latest
-        update_cache: true
-  - name: install docker-compose
-    apt:
-        name: docker-compose
-        state: latest
-        update_cache: true
-  - name: install docker module for python
-    pip:
-        name: docker
-  - name: Install Git environment
-    apt:
-      name: git
-      state: present
-      update_cache: yes
-  - name: Copy Application folder to remote host
-    copy:
-      src: /goinfre/ytaousi/42-projects/cloud-1
-      dest: /root
-  - name: create necessary directories for application persistent storage
-    file:
-      path: /root/cloud-1/volumes
-      state: directory
-    file:
-      path: /root/cloud-1/volumes/wordpress
-      state: directory
-    file:
-      path: /root/cloud-1/volumes/phpmyadmin
-      state: directory
-    file:
-      path: /root/cloud-1/volumes/database
-      state: directory
-  - name: resolve our loadbalancer in etc file  
-    lineinfile:  
-      dest: /etc/hosts  
-      line: 127.0.0.1 ytaousi.42.fr
-      state: present  
-      create: yes
-  roles:
-    # - common
-    # - mariadb
-    - nginx
-    # - phpmyadmin
-    # - wordpress
+- name: configure digital ocean Instance
+  import_playbook: ./playbooks/provision.yml
+  tags: provision
+- name: setup needed folder's
+  import_playbook: ./playbooks/folderStructure.yml
+  tags: folderStructure
+# - name: start services
+#   import_playbook: ./playbooks/startServices.yml
+#   tags: startServices

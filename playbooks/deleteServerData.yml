@@ -1,0 +1,17 @@
+---
+- name: Remove and clean in remote host
+  hosts: all
+  become: true
+  tasks:
+    - name: make fclean
+      command: make fclean
+      args:
+        chdir: /home/ytaousi/cloud-1
+    - name: delete data storage folder
+      file:
+        path: /home/ytaousi/cloud-1/data
+        state: absent
+    - name: delete base folder
+      file:
+        path: /home/ytaousi/cloud-1
+        state: absent
