@@ -4,7 +4,7 @@ services:
     container_name: nginx
     pull_policy: never
     build: 
-      context: ./nginx
+      context: ./tasks/nginx
       dockerfile: Dockerfile
     image: nginx:yassir
     restart: always
@@ -20,7 +20,7 @@ services:
       - wordpress
   # mariadb:
   #   container_name: mariadb
-  #   build: ./mariadb
+  #   build: ./tasks/mariadb
   #   image: mariadb:yassir
   #   pull_policy: never
   #   restart: always
@@ -31,7 +31,7 @@ services:
   #     - db-volume:/var/lib/mysql
   wordpress:
     container_name: php-fpm
-    build: ./wordpress
+    build: ./tasks/wordpress
     image: php-fpm:yassir
     pull_policy: never
     restart: always
