@@ -10,7 +10,7 @@
         state: directory
     - name: copy local files to base folder
       copy:
-        src: ../srcs/
+        src: ../roles/
         dest: /home/ytaousi/cloud-1
     - name: add data storage folder
       file:
