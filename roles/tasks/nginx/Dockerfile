@@ -1,6 +1,6 @@
 FROM debian:buster
 
-EXPOSE 443
+EXPOSE 443 80
 
 RUN apt update && apt upgrade -y && apt install -y vim nginx curl openssl openrc dos2unix
 RUN mkdir -p  /run/openrc/ && touch /run/openrc/softlevel
