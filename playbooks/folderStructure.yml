@@ -12,9 +12,13 @@
       copy:
         src: ../roles/
         dest: /home/ytaousi/cloud-1
-    - name: add data storage folder
+    - name: add wordpress storage folder
       file:
         path: /home/ytaousi/cloud-1/data/wordpress
+        state: directory
+    - name: add phpmyadmin storage folder  
+      file:
+        path: /home/ytaousi/cloud-1/data/phpmyadmin
         state: directory
     - name: add database storage folder
       file:
