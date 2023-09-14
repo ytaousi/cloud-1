@@ -3,7 +3,7 @@ all:
 
 fclean:
 	@printf "cleanning docker environment\n"
-	@docker stop $$(docker ps -qa)
+	@docker stop $(docker ps -qa)
 	docker system prune --all --force --volumes
 	docker network prune --force
 	docker volume prune --force

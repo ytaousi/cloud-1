@@ -10,11 +10,11 @@ RUN mkdir -p /var/run/mysqld && chown -R mysql:mysql /var/run/mysqld && chmod 77
 
 COPY ./configs/initscript.sh /usr/local/bin/initscript.sh
 COPY ./configs/create_users.sql /usr/local/bin/create_users.sql
-COPY ./configs/mysql_secure_installation.sql /usr/local/bin/mysqlSecureInstallation.sql
+COPY ./configs/mysqlsecureinstallation.sql /usr/local/bin/mysqlsecureinstallation.sql
 COPY ./configs/config_wp.sql /usr/local/bin/config_wp.sql
 COPY ./configs/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
 
-RUN chmod +x /usr/local/bin/initscript.sh && chmod +x /usr/local/bin/create_users.sql && chmod +x /usr/local/bin/mysqlSecureInstallation.sql && chmod +x /usr/local/bin/config_wp.sql
+RUN chmod +x /usr/local/bin/initscript.sh && chmod +x /usr/local/bin/create_users.sql && chmod +x /usr/local/bin/mysqlsecureinstallation.sql && chmod +x /usr/local/bin/config_wp.sql
 RUN dos2unix /usr/local/bin/initscript.sh
 
 ENTRYPOINT [ "/bin/bash", "/usr/local/bin/initscript.sh" ]
