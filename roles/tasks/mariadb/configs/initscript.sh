@@ -6,3 +6,4 @@
 # rc-service mysql restart
 
 sleep 3000
+# mysqld --bind-address=0.0.0.0
