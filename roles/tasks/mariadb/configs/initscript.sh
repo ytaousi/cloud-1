@@ -1,4 +1,5 @@
 #!/bin/bash
+# mysql_install_db
 # rc-service mysql start
 # mysql < mysql_secure_installation.sql 
 # mysql < create_users.sql -u root -p$DB_ROOT_PASS
