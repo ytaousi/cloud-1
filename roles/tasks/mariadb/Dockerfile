@@ -1,20 +1,18 @@
-FROM debian:buster
+FROM alpine:3.12
 
 EXPOSE 3306
 
-RUN apt update && apt upgrade -y && apt install -y vim curl wget dos2unix mariadb-server openrc mariadb-client
+RUN apk add mysql openrc mysql-client vim dos2unix
 
-RUN mkdir -p  /run/openrc/ && touch /run/openrc/softlevel
+COPY ./configs/setup.sh /setup.sh
+RUN chmod 777 /setup.sh
 
-RUN mkdir -p /var/run/mysqld && chown -R mysql:mysql /var/run/mysqld && chmod 777 /var/run/mysqld
+RUN mkdir -p  /run/openrc/
 
-COPY ./configs/initscript.sh /usr/local/bin/initscript.sh
-COPY ./configs/create_users.sql /usr/local/bin/create_users.sql
-COPY ./configs/mysqlsecureinstallation.sql /usr/local/bin/mysqlsecureinstallation.sql
-COPY ./configs/config_wp.sql /usr/local/bin/config_wp.sql
-COPY ./configs/50-server.cnf /etc/mysql/mariadb.conf.d/50-server.cnf
+COPY ./configs/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
-RUN chmod +x /usr/local/bin/initscript.sh && chmod +x /usr/local/bin/create_users.sql && chmod +x /usr/local/bin/mysqlsecureinstallation.sql && chmod +x /usr/local/bin/config_wp.sql
-RUN dos2unix /usr/local/bin/initscript.sh
-
-ENTRYPOINT [ "/bin/bash", "/usr/local/bin/initscript.sh" ]
+COPY ./configs/create_pma_tables.sql /create_pma_tables.sql
+COPY ./configs/create_users.sql /create_users.sql
+COPY ./configs/install_wp.sql /install_wp.sql
+RUN dos2unix /setup.sh
+ENTRYPOINT ["/bin/sh","/setup.sh"]
