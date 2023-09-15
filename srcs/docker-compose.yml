@@ -15,7 +15,6 @@ services:
       # - pm-volume:/var/www/html/phpmyadmin
     ports:
       - 443:443
-      - 80:80
     depends_on:
       - wordpress
   mariadb:
