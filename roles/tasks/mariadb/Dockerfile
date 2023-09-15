@@ -13,6 +13,6 @@ COPY ./configs/mariadb-server.cnf /etc/my.cnf.d/mariadb-server.cnf
 
 COPY ./configs/create_pma_tables.sql /create_pma_tables.sql
 COPY ./configs/create_users.sql /create_users.sql
-COPY ./configs/install_wp.sql /install_wp.sql
+
 RUN dos2unix /setup.sh
 ENTRYPOINT ["/bin/sh","/setup.sh"]
