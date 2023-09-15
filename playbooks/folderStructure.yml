@@ -10,7 +10,7 @@
         state: directory
     - name: copy local files to base folder
       copy:
-        src: ../roles/
+        src: ../srcs/
         dest: /home/ytaousi/cloud-1
     - name: add wordpress storage folder
       file:

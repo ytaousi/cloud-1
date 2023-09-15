@@ -4,23 +4,21 @@ services:
     container_name: nginx
     pull_policy: never
     build: 
-      context: C:\Users\msi\Desktop\42-Work\cloud-1\roles\tasks\nginx
+      context: C:\Users\msi\Desktop\42-Work\cloud-1\srcs\roles\nginx
       dockerfile: Dockerfile
     image: nginx:yassir
     restart: always
     volumes:
       - ./data/wordpress:/var/www/html/wordpress
       - ./data/phpmyadmin:/var/www/html/phpmyadmin
-      # - wp-volume:/var/www/html/wordpress
-      # - pma-volume:/var/www/html/phpmyadmin
     ports:
       - 8443:443
-      - 80:80
+      - 8080:80
     depends_on:
       - wordpress
   mariadb:
     container_name: mariadb
-    build: C:\Users\msi\Desktop\42-Work\cloud-1\roles\tasks\mariadb
+    build: C:\Users\msi\Desktop\42-Work\cloud-1\srcs\roles\mariadb
     image: mariadb:yassir
     pull_policy: never
     restart: always
@@ -28,35 +26,17 @@ services:
       - .env_variables
     volumes:
       - ./data/mariadb:/var/lib/mysql
-      # - db-volume:/var/lib/mysql
   wordpress:
     container_name: php-fpm
-    build: C:\Users\msi\Desktop\42-Work\cloud-1\roles\tasks\wordpress_phpmyadmin
+    build: C:\Users\msi\Desktop\42-Work\cloud-1\srcs\roles\wordpress_phpmyadmin
     image: php-fpm:yassir
     pull_policy: never
     restart: always
     volumes:
       - ./data/wordpress:/var/www/html/wordpress
       - ./data:/var/www/html/
-      # - wp-volume:/var/www/html/wordpress
     env_file:
       - .env_variables
     depends_on:
       - mariadb
     
-# volumes:
-#   wp-volume:
-#     driver_opts:
-#       o: bind
-#       type: none
-#       device: ./data/wordpress
-#   db-volume:
-#     driver_opts:
-#       o: bind
-#       type: none
-#       device: ./data/mariadb
-#   pma-volume:
-#     driver_opts:
-#       o: bind
-#       type: none
-#       device: ./data/phpmyadmin
