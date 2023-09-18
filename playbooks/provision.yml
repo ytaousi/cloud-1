@@ -16,6 +16,7 @@
           - software-properties-common
           - make
           - python3
+          - ufw
         state: present
     - name: add gpg keys
       apt_key:
@@ -34,3 +35,29 @@
         url : https://github.com/docker/compose/releases/download/1.29.2/docker-compose-Linux-x86_64
         dest: /usr/local/bin/docker-compose
         mode: 'u+x,g+x'
+    - name: enable ufw
+      ufw:
+        state: enabled
+    - name: allow port 80
+      ufw:
+        rule: allow
+        port: 80
+    - name: allow port 443
+      ufw:
+        rule: allow
+        port: 443
+    - name: allow port 22
+      ufw:
+        rule: allow
+        port: 22
+    - name: deny all traffic
+      ufw:
+        rule: deny
+    - name: start a boot ufw config
+      lineinfile:
+        path: /etc/ufw/ufw.conf
+        regexp: '^ENABLED='
+        line: 'ENABLED=yes'
+    - name: enforce ufw changes
+      ufw:
+        state: enabled
