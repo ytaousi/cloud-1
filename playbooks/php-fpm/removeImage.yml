@@ -1,0 +1,9 @@
+---
+- name: remove service image
+  hosts: all
+  become: true
+  tasks:
+    - name: remove php-fpm image
+      command: docker rm -f php-fpm && docker rmi php-fpm:yassir
+      args:
+        chdir: /home/ytaousi/cloud-1

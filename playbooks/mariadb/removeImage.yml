@@ -1,0 +1,9 @@
+---
+- name: remove service image
+  hosts: all
+  become: true
+  tasks:
+    - name: remove mariadb image
+      command: docker rm -f mariadb && docker rmi mariadb:yassir
+      args:
+        chdir: /home/ytaousi/cloud-1

@@ -1,0 +1,9 @@
+---
+- name: remove service
+  hosts: all
+  become: true
+  tasks:
+    - name: remove mariadb container
+      command: docker rm -f mariadb
+      args:
+        chdir: /home/ytaousi/cloud-1

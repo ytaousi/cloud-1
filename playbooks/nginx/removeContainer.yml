@@ -1,0 +1,9 @@
+---
+- name: remove service
+  hosts: all
+  become: true
+  tasks:
+    - name: remove nginx container
+      command: docker rm -f nginx
+      args:
+        chdir: /home/ytaousi/cloud-1

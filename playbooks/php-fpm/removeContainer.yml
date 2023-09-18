@@ -1,0 +1,9 @@
+---
+- name: remove service
+  hosts: all
+  become: true
+  tasks:
+    - name: remove php-fpm container
+      command: docker rm -f php-fpm
+      args:
+        chdir: /home/ytaousi/cloud-1

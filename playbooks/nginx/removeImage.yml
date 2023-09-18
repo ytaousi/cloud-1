@@ -1,0 +1,9 @@
+---
+- name: remove service image
+  hosts: all
+  become: true
+  tasks:
+    - name: remove nginx image
+      command: docker rm -f nginx && docker rmi nginx:yassir
+      args:
+        chdir: /home/ytaousi/cloud-1
