@@ -1,0 +1,17 @@
+---
+- name: build container images
+  hosts: all
+  become: true
+  tasks:
+    - name: build mariadb image
+      command: docker-compose -f ./docker-compose.yml build mariadb
+      args:
+        chdir: /home/ytaousi/cloud-1
+    - name: build php-fpm image
+      command: docker-compose -f ./docker-compose.yml build wordpress
+      args:
+        chdir: /home/ytaousi/cloud-1
+    - name: build nginx image
+      command: docker-compose -f ./docker-compose.yml build nginx
+      args:
+        chdir: /home/ytaousi/cloud-1

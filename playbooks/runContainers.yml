@@ -1,0 +1,17 @@
+---
+- name: run docker containers
+  hosts: all
+  become: true
+  tasks:
+    - name: run mariadb container
+      command: docker-compose -f ./docker-compose.yml up -d mariadb
+      args:
+        chdir: /home/ytaousi/cloud-1
+    - name: run php-fpm container
+      command: docker-compose -f ./docker-compose.yml up -d wordpress
+      args:
+        chdir: /home/ytaousi/cloud-1
+    - name: run nginx container
+      command: docker-compose -f ./docker-compose.yml up -d nginx
+      args:
+        chdir: /home/ytaousi/cloud-1

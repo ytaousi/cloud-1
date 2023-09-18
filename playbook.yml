@@ -5,6 +5,6 @@
 - name: setup needed folder's
   import_playbook: ./playbooks/folderStructure.yml
   tags: folderStructure
-- name: start services
-  import_playbook: ./playbooks/startServices.yml
-  tags: startServices
+# - name: start services
+#   import_playbook: ./playbooks/startServices.yml
+#   tags: startServices

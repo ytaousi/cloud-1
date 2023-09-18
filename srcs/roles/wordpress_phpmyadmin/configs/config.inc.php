@@ -42,8 +42,8 @@ $cfg['PmaAbsoluteUri'] = (isset($_SERVER['HTTP_X_FORWARDED_FOR']) ? '/phpmyadmin
 /* User used to manipulate with storage */
 $cfg['Servers'][$i]['controlhost'] = '';
 $cfg['Servers'][$i]['controlport'] = '3306';
-$cfg['Servers'][$i]['controluser'] = 'pma-user';
-$cfg['Servers'][$i]['controlpass'] = 'pma-pass';
+$cfg['Servers'][$i]['controluser'] = 'controluserEnv';
+$cfg['Servers'][$i]['controlpass'] = 'controlpassEnv';
 
 /* Storage database and tables */
 $cfg['Servers'][$i]['pmadb'] = 'phpmyadmin';
