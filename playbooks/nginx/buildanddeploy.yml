@@ -1,0 +1,13 @@
+---
+- name: Build and Deploy Nginx
+  hosts: all
+  become: true
+  tasks:
+    - name: build nginx Image
+      command: docker-compose -f ./docker-compose.yml build nginx
+      args:
+        chdir: /home/ytaousi/cloud-1
+    - name: run Nginx container
+      command: docker-compose -f ./docker-compose.yml up -d nginx
+      args:
+        chdir: /home/ytaousi/cloud-1

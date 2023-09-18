@@ -1,0 +1,13 @@
+---
+- name: Build and Deploy Mariadb
+  hosts: all
+  become: true
+  tasks:
+    - name: build mariadb Image
+      command: docker-compose -f ./docker-compose.yml build mariadb
+      args:
+        chdir: /home/ytaousi/cloud-1
+    - name: run mariadb container
+      command: docker-compose -f ./docker-compose.yml up -d mariadb
+      args:
+        chdir: /home/ytaousi/cloud-1

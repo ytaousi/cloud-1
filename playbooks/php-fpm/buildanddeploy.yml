@@ -1,0 +1,13 @@
+---
+- name: Build and Deploy php-fpm
+  hosts: all
+  become: true
+  tasks:
+    - name: build php-fpm Image
+      command: docker-compose -f ./docker-compose.yml build wordpress
+      args:
+        chdir: /home/ytaousi/cloud-1
+    - name: run php-fpm container
+      command: docker-compose -f ./docker-compose.yml up -d wordpress
+      args:
+        chdir: /home/ytaousi/cloud-1

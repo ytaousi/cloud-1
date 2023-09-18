@@ -1,0 +1,9 @@
+---
+- name: start service
+  hosts: all
+  become: true
+  tasks:
+    - name: start mariadb container
+      command: docker-compose -f ./docker-compose.yml up -d mariadb
+      args:
+        chdir: /home/ytaousi/cloud-1

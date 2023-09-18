@@ -1,0 +1,9 @@
+---
+- name: start service
+  hosts: all
+  become: true
+  tasks:
+    - name: start php-fpm container
+      command: docker-compose -f ./docker-compose.yml up -d wordpress
+      args:
+        chdir: /home/ytaousi/cloud-1

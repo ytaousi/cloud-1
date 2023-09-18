@@ -1,0 +1,9 @@
+---
+- name: stop service
+  hosts: all
+  become: true
+  tasks:
+    - name: stop nginx container
+      command: docker stop nginx
+      args:
+        chdir: /home/ytaousi/cloud-1

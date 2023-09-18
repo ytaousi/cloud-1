@@ -10,6 +10,7 @@ fclean:
 	rm -rf /home/ytaousi/cloud-1/data/wordpress/*
 	rm -rf /home/ytaousi/cloud-1/data/mariadb/*
 	rm -rf /home/ytaousi/cloud-1/data/phpmyadmin/*
+	docker builder prune -f
 re:
 	@printf "remaking looking for changes\n"
 	docker-compose -f /home/ytaousi/cloud-1/docker-compose.yml --env-file .env_variables down

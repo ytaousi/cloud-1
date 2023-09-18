@@ -1,0 +1,9 @@
+---
+- name: start service
+  hosts: all
+  become: true
+  tasks:
+    - name: start nginx container
+      command: docker-compose -f ./docker-compose.yml up -d nginx
+      args:
+        chdir: /home/ytaousi/cloud-1
