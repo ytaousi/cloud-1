@@ -9,12 +9,17 @@ services:
     image: nginx:yassir
     restart: always
     volumes:
-      - /home/ytaousi/cloud-1/data/wordpress:/var/www/html/wordpress
-      - /home/ytaousi/cloud-1/data/phpmyadmin:/var/www/html/phpmyadmin
+      # - /home/ytaousi/cloud-1/data/wordpress:/var/www/html/wordpress
+      # - /home/ytaousi/cloud-1/data/phpmyadmin:/var/www/html/phpmyadmin
+      - wp-volume:/var/www/html/wordpress
+      - pma-volume:/var/www/html/phpmyadmin
     ports:
       - 443:443
       - 80:80
+    env_file:
+      - .env_variables
     depends_on:
+      - mariadb
       - wordpress
   mariadb:
     container_name: mariadb
@@ -25,7 +30,8 @@ services:
     env_file:
       - .env_variables
     volumes:
-      - /home/ytaousi/cloud-1/data/mariadb:/var/lib/mysql
+      # - /home/ytaousi/cloud-1/data/mariadb:/var/lib/mysql
+      - db-volume:/var/lib/mysql
   wordpress:
     container_name: php-fpm
     build: ./roles/wordpress_phpmyadmin
@@ -33,9 +39,29 @@ services:
     pull_policy: never
     restart: always
     volumes:
-      - /home/ytaousi/cloud-1/data/wordpress:/var/www/html/wordpress
+      # - /home/ytaousi/cloud-1/data/wordpress:/var/www/html/wordpress
       - /home/ytaousi/cloud-1/data:/var/www/html/
+      - wp-volume:/var/www/html/wordpress
     env_file:
       - .env_variables
     depends_on:
       - mariadb
+volumes:
+  db-volume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: /home/ytaousi/cloud-1/data/mariadb
+  wp-volume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: /home/ytaousi/cloud-1/data/wordpress
+  pma-volume:
+    driver: local
+    driver_opts:
+      type: 'none'
+      o: 'bind'
+      device: /home/ytaousi/cloud-1/data/phpmyadmin
